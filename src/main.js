@@ -127,6 +127,21 @@ function predict(name, dna_sequence, disease) {
     });
 }   
 
+function add_disease(name, sequence) {
+    const invalid_seq_pattern = new RegExp('[^(AGCT)]+');
+    var insert_query = "INSERT INTO penyakit (nama_penyakit, rantai) VALUES (\'";
+    if (invalid_seq_pattern.test(sequence)) {
+        console.log("invalid sequence");
+    }
+    else {
+        insert_query += name + "\',\'" + sequence + "\')";
+        con.query(insert_query, function(err) {
+            if (err) throw err;
+            console.log("new disease added");
+        });
+    }
+}
+
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
