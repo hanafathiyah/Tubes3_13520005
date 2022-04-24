@@ -40,7 +40,7 @@ function border(text) {
     return b;
 }
 
-function kmpMatch(text, pattern) {
+export function kmpMatch(text, pattern) {
     var match = false;
     var t_length = text.length;
     var p_length = pattern.length;
@@ -49,10 +49,8 @@ function kmpMatch(text, pattern) {
 
     var i = 0; // iterator for text
     var j = 0; // iterator for pattern
-    var count = 0;
 
     while (!match && i < t_length) {
-        count++;
         if (text[i] == pattern[j]) {
             if (j == p_length - 1) {
                 match = true;
@@ -72,5 +70,5 @@ function kmpMatch(text, pattern) {
             }
         }
     }
-    return count;
+    return match;
 }
