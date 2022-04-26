@@ -94,5 +94,5 @@ let con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia", "kmp");
+    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia", "boyermoore");
 });

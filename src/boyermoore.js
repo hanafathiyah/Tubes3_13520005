@@ -16,7 +16,7 @@ function bmMatch(text, pattern) {
     }
     let j = m -1;
     do {
-        if (pattern[j] === text[i]) {
+        if (pattern.charAt(j)=== text.charAt(i)) {
             if (j === 0) {
                 return i; // sama
             } else {
@@ -24,7 +24,7 @@ function bmMatch(text, pattern) {
                 j --;
             }
         } else {
-            let lo = last[i];
+            let lo = last[text.charAt(i)];
             i = i + m - Math.min(j, 1 + lo);
             j = m - 1;
         }
@@ -33,8 +33,13 @@ function bmMatch(text, pattern) {
 }
 
 function buildLast(pattern) {
-    let last = [];
-    return 0;
-}
+    const last = [];
 
-// belum selesai
+    for(let i = 0; i < 128; i++) {
+        last[i] = -1;
+    }
+    for(let i = 0; i < pattern.length; i++) {
+        last[pattern.charAt(i)] = i;
+    }
+    return last;
+}
