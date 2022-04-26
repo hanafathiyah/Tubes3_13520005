@@ -1,23 +1,26 @@
-import { createRequire } from 'module';
+import express, { json, urlencoded } from "express";
+import cors from "cors";
+import db from './app/models/index.js';
 
-const require = createRequire(import.meta.url);
-const express = require("express");
-const cors = require("cors");
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8080"
+let corsOptions = {
+  origin: "http://localhost:8081"
 };
-
 app.use(cors(corsOptions));
-// parse requests of content-type - application/json
-app.use(express.json());
+
+app.use(json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to DNA matching application." });
+  res.json({ message: "Welcome to DNA Checker Application" });
 });
+
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
