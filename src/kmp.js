@@ -1,20 +1,20 @@
 function border(text) {
     const b = []; // array of sizes of the same prefix and suffix
     b[0] = 0;
-    var j; // mismatch position
-    var k; // position before mismatch
+    let j; // mismatch position
+    let k; // position before mismatch
     for (j = 2; j < text.length; j++) {
         k = j - 1;
         
-        var suffix = "";
-        var size = 0;
-        var match = true;
-        var n = 1;
+        let suffix = "";
+        let size = 0;
+        let match = true;
+        let n = 1;
 
         while (match && n <= k) {
-            var prefix = "";
-            var suffix = "";
-            var i = 0;
+            let prefix = "";
+            let suffix = "";
+            let i = 0;
             //console.log(k, n)
             while (i < n) {
                 prefix += text[i];
@@ -41,14 +41,14 @@ function border(text) {
 }
 
 export function kmpMatch(text, pattern) {
-    var match = false;
-    var t_length = text.length;
-    var p_length = pattern.length;
+    let match = false;
+    let t_length = text.length;
+    let p_length = pattern.length;
 
-    var fail = border(pattern);
+    let fail = border(pattern);
 
-    var i = 0; // iterator for text
-    var j = 0; // iterator for pattern
+    let i = 0; // iterator for text
+    let j = 0; // iterator for pattern
 
     while (!match && i < t_length) {
         if (text[i] == pattern[j]) {

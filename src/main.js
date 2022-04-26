@@ -5,11 +5,11 @@ import { kmpMatch } from './kmp.js';
 const require = createRequire(import.meta.url);
 
 function levenshtein(stra, strb) {
-    var length_a = stra.length;
-    var length_b = strb.length;
+    let length_a = stra.length;
+    let length_b = strb.length;
 
-    var tail_a = stra.slice(1, length_a);
-    var tail_b = strb.slice(1, length_b);
+    let tail_a = stra.slice(1, length_a);
+    let tail_b = strb.slice(1, length_b);
 
     if (length_b == 0) {
         return length_a;
@@ -26,17 +26,17 @@ function levenshtein(stra, strb) {
 }
 
 function predict(name, dna_sequence, disease) {
-    var select_query = "SELECT rantai FROM penyakit WHERE nama_penyakit = \'" + disease + "\'";
-    var insert_query = "INSERT INTO prediksi (tanggal, nama_pasien, penyakit, status) VALUES (\'";
-    var d = new Date();
-    var day = d.getDate();
-    var month = d.getMonth();
-    var year = d.getFullYear();
+    let select_query = "SELECT rantai FROM penyakit WHERE nama_penyakit = \'" + disease + "\'";
+    let insert_query = "INSERT INTO prediksi (tanggal, nama_pasien, penyakit, status) VALUES (\'";
+    let d = new Date();
+    let day = d.getDate();
+    let month = d.getMonth();
+    let year = d.getFullYear();
     insert_query += year + "-" + month + "-" + day + "\',\'";
     insert_query += name + "\',\'";
     insert_query += disease + "\',\'";
-    var pattern;
-    var res;
+    let pattern;
+    let res;
 
     con.query(select_query, function(err, result) {
         if (err) throw err;
@@ -57,7 +57,7 @@ function predict(name, dna_sequence, disease) {
 
 function add_disease(name, sequence) {
     const invalid_seq_pattern = new RegExp('[^(AGCT)]+');
-    var insert_query = "INSERT INTO penyakit (nama_penyakit, rantai) VALUES (\'";
+    let insert_query = "INSERT INTO penyakit (nama_penyakit, rantai) VALUES (\'";
     if (invalid_seq_pattern.test(sequence)) {
         console.log("invalid sequence");
     }
@@ -70,18 +70,17 @@ function add_disease(name, sequence) {
     }
 }
 
-var mysql = require('mysql');
+let mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  database : "tubes3stima",
-  user: "root",
-  password: "" // ganti password di sini
+let con = mysql.createConnection({
+    host: "localhost",
+    database : "tubes3stima",
+    user: "root",
+    password: "" // ganti password di sini
 });
 
 con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia");
-  
+    if (err) throw err;
+    console.log("Connected!");
+    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia");
 });

@@ -31,8 +31,8 @@ DROP TABLE IF EXISTS `penyakit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `penyakit` (
-  `nama_penyakit` varchar(255) NOT NULL,
-  `rantai` varchar(255) NOT NULL,
+  `nama_penyakit` letchar(255) NOT NULL,
+  `rantai` letchar(255) NOT NULL,
   PRIMARY KEY (`nama_penyakit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,8 +57,8 @@ DROP TABLE IF EXISTS `prediksi`;
 CREATE TABLE `prediksi` (
   `id_prediksi` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tanggal` date NOT NULL,
-  `nama_pasien` varchar(255) NOT NULL,
-  `penyakit` varchar(255) NOT NULL,
+  `nama_pasien` letchar(255) NOT NULL,
+  `penyakit` letchar(255) NOT NULL,
   `status` enum('True','False') NOT NULL,
   PRIMARY KEY (`id_prediksi`),
   KEY `penyakit` (`penyakit`),
