@@ -148,7 +148,7 @@ var con = mysql.createConnection({
   host: "localhost",
   database : "tubes3stima",
   user: "root",
-  password: "root" // ganti password di sini
+  password: "" // ganti password di sini
 });
 
 con.connect(function(err) {
