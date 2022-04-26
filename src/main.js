@@ -2,6 +2,8 @@
 
 import { createRequire } from 'module';
 import { kmpMatch } from './kmp.js';
+import { boyermooreMatch } from './boyermoore.js';
+
 const require = createRequire(import.meta.url);
 
 function levenshtein(stra, strb) {
@@ -25,7 +27,7 @@ function levenshtein(stra, strb) {
     }
 }
 
-function predict(name, dna_sequence, disease) {
+function predict(name, dna_sequence, disease, method_string_match) {
     let select_query = "SELECT rantai FROM penyakit WHERE nama_penyakit = \'" + disease + "\'";
     let insert_query = "INSERT INTO prediksi (tanggal, nama_pasien, penyakit, status) VALUES (\'";
     let d = new Date();
@@ -41,11 +43,21 @@ function predict(name, dna_sequence, disease) {
     con.query(select_query, function(err, result) {
         if (err) throw err;
         pattern = result[0].rantai;
-        if (kmpMatch(dna_sequence, pattern)) {
-            res = "True";
+        if (method_string_match === "kmp") {
+            if (kmpMatch(dna_sequence, pattern)) {
+                res = "True";
+            }
+            else {
+                res = "False";
+            }
         }
-        else {
-            res = "False";
+        if (method_string_match === "boyermoore") {
+            if (boyermooreMatch(dna_sequence, pattern)) {
+                res = "True";
+            }
+            else {
+                res = "False";
+            }
         }
         insert_query += res + "\')";
         con.query(insert_query, function(err) {
@@ -82,5 +94,5 @@ let con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia");
+    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia", "kmp");
 });
