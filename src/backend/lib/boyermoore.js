@@ -32,7 +32,7 @@ function bmMatch(text, pattern) {
     return -1; // no match
 }
 
-function buildLast(pattern) {
+export function buildLast(pattern) {
     const last = [];
 
     for(let i = 0; i < 128; i++) {

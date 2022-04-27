@@ -1,6 +1,7 @@
 import express, { json, urlencoded } from "express";
 import fileUpload from "express-fileupload";
 import { createPenyakit, deletePenyakit, readPenyakit } from "./controller/penyakit.controller.js";
+import { createPrediksi, deletePrediksi, readPrediksi } from "./controller/prediksi.controller.js";
 const app = express();
 
 app.use(json());
@@ -12,8 +13,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to DNA Checker Application" });
 });
 app.get("/penyakit", readPenyakit)
+app.get("/prediksi", readPrediksi)
 app.post("/penyakit", createPenyakit)
+app.post("/prediksi", createPrediksi)
 app.delete("/penyakit/:id", deletePenyakit)
+app.delete("/prediksi/:id", deletePrediksi)
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

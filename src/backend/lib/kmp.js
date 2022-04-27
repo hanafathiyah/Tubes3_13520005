@@ -1,4 +1,4 @@
-function border(text) {
+export function border(text) {
     const b = []; // array of sizes of the same prefix and suffix
     b[0] = 0;
     let j; // mismatch position
@@ -27,7 +27,7 @@ function border(text) {
                 i++;
             }
             //console.log("suffix :", suffix);
-            if (prefix == suffix && n > size) {
+            if (prefix === suffix && n > size) {
                 size = n;
                 match = true;
             }
@@ -51,8 +51,8 @@ export function kmpMatch(text, pattern) {
     let j = 0; // iterator for pattern
 
     while (!match && i < t_length) {
-        if (text[i] == pattern[j]) {
-            if (j == p_length - 1) {
+        if (text[i] === pattern[j]) {
+            if (j === p_length - 1) {
                 match = true;
             }
             else {
@@ -61,7 +61,7 @@ export function kmpMatch(text, pattern) {
             }
         }
         else {
-            if (j == 0) {
+            if (j === 0) {
                 i++;
                 j = 0;
             }

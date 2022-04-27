@@ -39,7 +39,7 @@ export async function createPenyakit(req, res) {
         return ;
     }
 
-    await prisma.penyakit.create({
+    const queryResult = await prisma.penyakit.create({
         data: {
             nama_penyakit: name,
             rantai: dnadata
@@ -47,7 +47,11 @@ export async function createPenyakit(req, res) {
     })
     res.json({
         status: "success",
-        message: "penyakit added"
+        message: "penyakit added",
+        data: {
+            id_penyakit: queryResult.id_penyakit,
+            nama_penyakit: queryResult.nama_penyakit
+        }
     })
 
 }
