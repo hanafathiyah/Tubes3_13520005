@@ -1,8 +1,8 @@
 // main.js
 
 import { createRequire } from 'module';
-import { kmpMatch } from './kmp.js';
-import { boyermooreMatch } from './boyermoore.js';
+import { kmpMatch } from './lib/kmp.js';
+import { boyermooreMatch } from './lib/boyermoore.js';
 
 const require = createRequire(import.meta.url);
 
@@ -82,6 +82,124 @@ function add_disease(name, sequence) {
     }
 }
 
+function search(input) {
+    const valid_pattern1 = /\d\d?\s([Jj]anuari|[Ff]ebruari|[Mm]aret|[Aa]pril|[Mm]ei|[Jj]uni|[Jj]uli|[Aa]gustus|[Ss]eptember|[Oo]ktober|[Nn]ovember|[Dd]esember)\s\d{4}(\s[a-zA-Z1-9-]+)?/g;
+    const valid_pattern2 = /(3[0-1]|[0-2]?[1-9])-(1[0-2]|0?[1-9])-(\d{4})(\s[a-zA-Z1-9-]+)?/g; // DD-MM-YYYY
+    const valid_pattern3 = /(3[0-1]|[0-2]?[1-9])\/(1[0-2]|0?[1-9])\/(\d{4})(\s[a-zA-Z1-9-]+)?/g; // DD/MM/YYYY
+    const valid_pattern4 = /\d{4}-(1[0-2]|0?[1-9])-(3[0-1]|[0-2]?[1-9])(\s[a-zA-Z1-9-]+)?/g; // YYYY-MM-DD
+    const valid_string_only_pattern = /^[a-zA-Z1-9-]+$/g
+
+    let year, month, day, disease;
+    let search_query = "SELECT * FROM prediksi WHERE ";
+    let valid = true;
+
+    if (valid_pattern1.test(input)) {
+        search_query += "tanggal = ";
+        const clean = input.match(valid_pattern1)[0];
+        const arr = clean.split(" ");
+        day = arr[0];
+        if (arr[1] == "Januari" || arr[1] == "januari") {
+            month = '1';
+        }
+        else if (arr[1] == "Februari" || arr[1] == "februari") {
+            month = '2';
+        }
+        else if (arr[1] == "Maret" || arr[1] == "maret") {
+            month = '3';
+        }
+        else if (arr[1] == "April" || arr[1] == "april") {
+            month = '4';
+        }
+        else if (arr[1] == "Mei" || arr[1] == "mei") {
+            month = '5';
+        }
+        else if (arr[1] == "Juni" || arr[1] == "juni") {
+            month = '6';
+        }
+        else if (arr[1] == "Juli" || arr[1] == "juli") {
+            month = '7';
+        }
+        else if (arr[1] == "Agustus" || arr[1] == "agustus") {
+            month = '8';
+        }
+        else if (arr[1] == "September" || arr[1] == "september") {
+            month = '9';
+        }
+        else if (arr[1] == "Oktober" || arr[1] == "oktober") {
+            month = '10';
+        }
+        else if (arr[1] == "November" || arr[1] == "november") {
+            month = '11';
+        }
+        else {
+            month = '12';
+        }
+        year = arr[2];
+        search_query += '\'' + year + '-' + month + '-' + day + '\'';
+        if (arr.length > 3) {
+            // ada nama penyakit
+            disease = arr[3];
+            search_query += " AND penyakit = \'" + disease + '\'';
+        }
+    }
+    else if (valid_pattern2.test(input)) {
+        search_query += 'tanggal = ';
+        const arr = input.split(" ");
+        const arr2 = arr[0].split('-');
+        day = arr2[0];
+        month = arr2[1];
+        year = arr2[2];
+        search_query += '\'' + year + '-' + month + '-' + day + '\'';
+        if (arr.length > 1) {
+            // ada disease
+            disease = arr[1];
+            search_query += " AND penyakit = \'" + disease + '\'';
+        }
+    }
+    else if (valid_pattern3.test(input)) {
+        search_query += "tanggal = ";
+        const arr = input.split(" ");
+        const arr2 = arr[0].split('/');
+        day = arr2[0];
+        month = arr2[1];
+        year = arr2[2];
+        search_query += '\'' + year + '-' + month + '-' + day + '\'';
+        if (arr.length > 1) {
+            // ada disease
+            disease = arr[1];
+            search_query += " AND penyakit = \'" + disease + '\'';
+        }
+    }
+    else if (valid_pattern4.test(input)) {
+        search_query += "tanggal = ";
+        const arr = input.split(" ");
+        const arr2 = arr[0].split('-');
+        day = arr2[2];
+        month = arr2[1];
+        year = arr2[0];
+        search_query += '\'' + year + '-' + month + '-' + day + '\'';
+        if (arr.length > 1) {
+            // ada disease
+            disease = arr[1];
+            search_query += " AND penyakit = \'" + disease + '\'';
+        }
+    }
+    else if (valid_string_only_pattern.test(input)) {
+        disease = input;
+        search_query += "penyakit = \'" + disease + '\'';
+    }
+    else {
+        valid = false;
+        console.log("Format invalid");
+    }
+    if (valid) {
+        con.query(search_query, function(err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
+    }
+}
+
 let mysql = require('mysql');
 
 let con = mysql.createConnection({
@@ -94,5 +212,8 @@ let con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    predict("Aleksey Romanov", "GTACAGTTCATAGCGTCAAGTGTACA", "hemophilia", "boyermoore");
-});
+    //predict("Aleksey Romanov", "GTACAGTTCATAGGGTCAAGTGTACA", "hemophilia", "boyermoore");
+}); 
+
+const test = 'hemophilia';
+search(test);
