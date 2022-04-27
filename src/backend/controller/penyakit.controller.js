@@ -57,17 +57,13 @@ export async function createPenyakit(req, res) {
  * @param {Request} req Express.js Request object
  * @param {Response} res Express.js Response object
  */
-export function readPenyakit(req, res) {
-   
-}
-
-/**
- * Endpoint for update penyakit
- * @param {Request} req Express.js Request object
- * @param {Response} res Express.js Response object
- */
-export function updatePenyakit(req, res) {
-   
+export async function readPenyakit(req, res) {
+   const data = await prisma.penyakit.findMany()
+   res.json({
+       status: "success",
+       message: "read data penyakit berhasil",
+       data
+   })
 }
 
 /**
@@ -75,6 +71,30 @@ export function updatePenyakit(req, res) {
  * @param {Request} req Express.js Request object
  * @param {Response} res Express.js Response object
  */
-export function deletePenyakit(req, res) {
-
+export async function deletePenyakit(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+        await prisma.penyakit.delete({
+            where: {
+                id: id
+            }
+        }) 
+        res.json({
+            status: "success",
+            message: "penyakit deleted"
+        })
+    } catch (e){
+        if (e.code === "P2025") {
+            res.status(404).json({
+                status: "error",
+                message: "penyakit not found"
+            })
+        } else {
+            res.status(500).json({
+                status: "error",
+                message: "internal server error",
+                data: e
+            })
+        }
+    }
 }
