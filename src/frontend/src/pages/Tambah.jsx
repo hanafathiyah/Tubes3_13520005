@@ -21,10 +21,12 @@ function Tambah() {
         <div style={{display: "flex", flexDirection: "column"}}>
             <h1>Tambahkan Penyakit</h1>
             <TextField id="outlined-basic" label="Nama Penyakit" variant="outlined" value={namapenyakit} onInput = {(e) => setnamapenyakit(e.target.value)} margin="normal"/>
+            <br></br>
             <Button
                 startIcon={<UploadIcon />}
                 variant="contained"
                 component="label"
+                margin="normal"
                 >
                 {!filedna?"Upload File":filedna.name}
                 <input
@@ -34,7 +36,7 @@ function Tambah() {
                     hidden
                 />
             </Button> <br></br>
-            <Button variant="contained" color="primary" onClick={()=>submit(namapenyakit,filedna)}>
+            <Button variant="contained" color="primary" onClick={()=>submit(namapenyakit,filedna)} margin="normal">
                 Submit
             </Button>
         </div>
