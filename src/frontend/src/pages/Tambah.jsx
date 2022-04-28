@@ -1,29 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import UploadIcon from '@mui/icons-material/Upload';
+import axios from 'axios'
 
-function SubmitTambah() {
-    alert("Penyakit telah ditambahkan!");
+async function submit(namapenyakit, filedna) {
+    const formdata = new FormData();
+    formdata.append("dnafile",filedna);
+    formdata.append("name",namapenyakit);
+    try {
+        await axios.post("http://localhost:8080/penyakit", formdata);
+        alert("Penyakit telah ditambahkan!");
+    } catch (e) {
+        alert("Gagal menambahkan data!");
+    }
 }
-
 function Tambah() {
+    const [namapenyakit, setnamapenyakit] = useState("");
+    const [filedna, setfiledna] = useState(null);
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column"}}>
             <h1>Tambahkan Penyakit</h1>
-            <TextField id="outlined-basic" label="Nama Penyakit" variant="outlined" />
+            <TextField id="outlined-basic" label="Nama Penyakit" variant="outlined" value={namapenyakit} onInput = {(e) => setnamapenyakit(e.target.value)} margin="normal"/>
             <Button
                 startIcon={<UploadIcon />}
                 variant="contained"
                 component="label"
                 >
-                Upload File
+                {!filedna?"Upload File":filedna.name}
                 <input
+                    onChange={(e) => setfiledna(e.target.files[0])}
                     type="file"
                     accept=".txt"
                     hidden
                 />
             </Button> <br></br>
-            <Button variant="contained" color="primary" onClick={SubmitTambah}>
+            <Button variant="contained" color="primary" onClick={()=>submit(namapenyakit,filedna)}>
                 Submit
             </Button>
         </div>

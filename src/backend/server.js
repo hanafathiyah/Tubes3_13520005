@@ -2,8 +2,10 @@ import express, { json, urlencoded } from "express";
 import fileUpload from "express-fileupload";
 import { createPenyakit, deletePenyakit, readPenyakit } from "./controller/penyakit.controller.js";
 import { createPrediksi, deletePrediksi, readPrediksi } from "./controller/prediksi.controller.js";
+import cors from 'cors';
 const app = express();
 
+app.use(cors());
 app.use(json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
