@@ -16,14 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `tubes3stima`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tubes3stima` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `tubes3stima`;
-
---
 -- Table structure for table `penyakit`
 --
 
@@ -63,7 +55,7 @@ CREATE TABLE `prediksi` (
   PRIMARY KEY (`id_prediksi`),
   KEY `penyakit` (`penyakit`),
   CONSTRAINT `prediksi_ibfk_1` FOREIGN KEY (`penyakit`) REFERENCES `penyakit` (`nama_penyakit`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +64,7 @@ CREATE TABLE `prediksi` (
 
 LOCK TABLES `prediksi` WRITE;
 /*!40000 ALTER TABLE `prediksi` DISABLE KEYS */;
-INSERT INTO `prediksi` (`id_prediksi`, `tanggal`, `nama_pasien`, `penyakit`, `status`) VALUES (1,'2022-03-24','Aleksey Romanov','hemophilia','True');
+INSERT INTO `prediksi` (`id_prediksi`, `tanggal`, `nama_pasien`, `penyakit`, `status`) VALUES (1,'2022-03-24','Aleksey Romanov','hemophilia','True'),(2,'2022-03-26','Aleksey Romanov','hemophilia','True'),(3,'2022-03-27','Aleksey Romanov','hemophilia','True'),(4,'2022-03-27','Aleksey Romanov','hemophilia','True'),(5,'2022-03-27','Aleksey Romanov','hemophilia','False');
 /*!40000 ALTER TABLE `prediksi` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -85,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-24 22:18:27
+-- Dump completed on 2022-04-28  1:00:51

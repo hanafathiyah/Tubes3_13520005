@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Penyakit {
+  id            Int        @id @default(autoincrement())
+  nama_penyakit String     @db.VarChar(255)
+  rantai        String     @db.Text
+  Prediksi      Prediksi[]
+}
+
+model Prediksi {
+  id_prediksi Int      @id @default(autoincrement())
+  timestamp   DateTime @default(now())
+  nama_pasien String   @db.VarChar(255)
+  id_penyakit Int
+  penyakit    Penyakit @relation(fields: [id_penyakit], references: [id])
+  status      Boolean
+  similarity  Float
+}

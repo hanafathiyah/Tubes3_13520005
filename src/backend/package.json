@@ -8,6 +8,7 @@
     "test": "test"
   },
   "dependencies": {
+    "@prisma/client": "^3.13.0",
     "accepts": "^1.3.8",
     "array-flatten": "^1.1.1",
     "bignumber.js": "^9.0.0",
@@ -29,6 +30,7 @@
     "escape-html": "^1.0.3",
     "etag": "^1.8.1",
     "express": "^4.18.0",
+    "express-fileupload": "^1.3.1",
     "finalhandler": "^1.2.0",
     "forwarded": "^0.2.0",
     "fresh": "^0.5.2",
@@ -81,7 +83,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "migration": "prisma db push",
+    "serve": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -94,5 +98,8 @@
     "url": "https://github.com/hanafathiyah/Tubes3_13520005/issues"
   },
   "homepage": "https://github.com/hanafathiyah/Tubes3_13520005#readme",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "prisma": "^3.13.0"
+  }
 }
