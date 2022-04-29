@@ -94,7 +94,7 @@ function Test() {
             <div>
                     <div>
                         <TableContainer component={Paper}>
-                            <Table aria-label="Data Predikzi">
+                            <Table aria-label="Data Prediksi">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Id</TableCell>
