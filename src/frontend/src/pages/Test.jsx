@@ -50,7 +50,7 @@ function Test() {
     }, [])
     //const [prediksipenyakit, setprediksi] = useState("");
     return (
-        <div style={{display: "flex", flexDirection: "column"}}>
+        <div style={{display: "flex", flexDirection: "column", paddingTop:"100px"}}>
             <h1>Tes DNA</h1>
             <TextField id="outlined-basic" label="Nama Pengguna" variant="outlined" value={namaorang} onInput = {(e) => setnamaorang(e.target.value)} margin="normal"/>
             <br></br>
@@ -95,7 +95,7 @@ function Test() {
                 {hasilpemeriksaan.map((hp) => (
                     <div>
                         <p>
-                            {hp.timestamp} {hp.nama_pasien} {hp.id_penyakit} {hp.status} {hp.similarity}
+                            {hp.timestamp} {hp.nama_pasien} {hp.penyakit.nama_penyakit} {hp.status} {hp.similarity}
                         </p>
                     </div>
                 ))}
