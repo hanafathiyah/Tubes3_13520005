@@ -3,26 +3,29 @@ import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from "@m
 import UploadIcon from '@mui/icons-material/Upload';
 import axios from 'axios'
 
-async function kmpcheck(namaorang, filedna) {
+async function kmpcheck(namaorang, filedna,idpenyakitchoosen) {
     const formdata = new FormData();
     formdata.append("dnafile",filedna);
     formdata.append("nama_pasien",namaorang);
     formdata.append("algorithm","kmp");
+    formdata.append("id_penyakit", idpenyakitchoosen);
     try {
-        await axios.post("http://localhost:8080/penyakit", formdata);
-        alert("Penyakit telah ditambahkan!");
+        await axios.post("http://localhost:8080/prediksi", formdata);
+        alert("Prediksi telah ditambahkan!");
     } catch (e) {
         alert("Gagal menambahkan data!");
     }
 }
 
-async function boyermoorecheck(namaorang, filedna) {
+async function boyermoorecheck(namaorang, filedna,idpenyakitchoosen) {
     const formdata = new FormData();
     formdata.append("dnafile",filedna);
-    formdata.append("name",namapenyakit);
+    formdata.append("nama_pasien",namaorang);
+    formdata.append("algorithm","boyermoore");
+    formdata.append("id_penyakit", idpenyakitchoosen);
     try {
-        await axios.post("http://localhost:8080/penyakit", formdata);
-        alert("Penyakit telah ditambahkan!");
+        await axios.post("http://localhost:8080/prediksi", formdata);
+        alert("Prediksi telah ditambahkan!");
     } catch (e) {
         alert("Gagal menambahkan data!");
     }
@@ -70,17 +73,17 @@ function Test() {
                     label="Prediksi Penyakit"
                     onChange={(e) => setidpenyakitchoosen(e.target.value)}
                 >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {datapenyakit.map((dp) => (
+                    <MenuItem key={dp.id} value={dp.id}>{dp.id+" "+dp.nama_penyakit+" "+dp.rantai}</MenuItem>
+                    ))}
                 </Select>
             </FormControl> 
             <br></br>
-            <Button variant="contained" color="primary" onClick={()=>kmpcheck(namaorang,filedna)} margin="normal">
+            <Button variant="contained" color="primary" onClick={()=>kmpcheck(namaorang,filedna,idpenyakitchoosen)} margin="normal">
                 Submit (use KMP checker)
             </Button>
             <br></br>
-            <Button variant="contained" color="primary" onClick={()=>boyermoorecheck(namaorang,filedna)} margin="normal">
+            <Button variant="contained" color="primary" onClick={()=>boyermoorecheck(namaorang,filedna,idpenyakitchoosen)} margin="normal">
                 Submit (use Boyer-Moore checker)
             </Button>
         </div>
