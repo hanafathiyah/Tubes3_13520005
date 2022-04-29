@@ -115,7 +115,7 @@ function Test() {
                                         <TableCell>{hp.timestamp}</TableCell>
                                         <TableCell>{hp.nama_pasien}</TableCell>
                                         <TableCell>{hp.penyakit.nama_penyakit}</TableCell>
-                                        <TableCell>{hp.status}</TableCell>
+                                        <TableCell>{hp.status.toString()}</TableCell>
                                         <TableCell>{hp.similarity}</TableCell>
                                     </TableRow>
                                 ))}
