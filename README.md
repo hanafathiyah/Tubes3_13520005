@@ -1,13 +1,14 @@
 ﻿# Tubes3_13520005
 
 > Penerapan _String Matching_ dan _Regular Expression_ dalam DNA _Pattern Matching_
+![Screenshot (168)](https://user-images.githubusercontent.com/40686115/165985478-2ee0ab89-e1c3-4e1d-941f-c2d9ad5f5db3.png)
+
 
 ## Description
 This is a big project created in order to fulfill the requirements of IF2211 Algorithm Strategy course in Institut Teknologi Bandung (ITB) Academic Year of 2021/2022. This project is a web based application created with Node.js on backend and React on frontend. This application also comes with a database which is implemented using PostgreSQL. This application utilizes String Matching Algorithms and Regular Expressions to detect whether a person has a certain genetic disease or not. The prediction results are stored in a database which can be searched using a query.
 
 ## Requirements
 - Backend
-
 | Name | Version |
 | :---: | :---: |
 | Node.js | 16.14.2 |
