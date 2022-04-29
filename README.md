@@ -10,7 +10,7 @@ This is a big project created in order to fulfill the requirements of IF2211 Alg
 
 | Name | Version |
 | :---: | :---: |
-| Node.js | 12.16.3 |
+| Node.js | 16.14.2 |
 | PostgreSQL | 12.2.0 |
 
 - Frontend
