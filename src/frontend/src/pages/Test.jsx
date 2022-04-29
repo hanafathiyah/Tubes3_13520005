@@ -37,9 +37,13 @@ function Test() {
     const [filedna, setfiledna] = useState(null);
     const [datapenyakit, setdatapenyakit] = useState([])
     const [idpenyakitchoosen, setidpenyakitchoosen] = useState()
+    const [hasilpemeriksaan, sethasilpemeriksaan] = useState([])
     async function fetchData() {
         const data = await axios.get("https://dnachecker.herokuapp.com/penyakit")
         setdatapenyakit(data.data.data)
+
+        const data2 = await axios.get("https://dnachecker.herokuapp.com/prediksi")
+        sethasilpemeriksaan(data2.data.data)
     }
     useEffect(() => {
         fetchData()
@@ -86,6 +90,16 @@ function Test() {
             <Button variant="contained" color="primary" onClick={()=>boyermoorecheck(namaorang,filedna,idpenyakitchoosen)} margin="normal">
                 Submit (use Boyer-Moore checker)
             </Button>
+            <br></br>
+            <div>
+                {hasilpemeriksaan.map((hp) => (
+                    <div>
+                        <p>
+                            {hp.timestamp} {hp.nama_pasien} {hp.id_penyakit} {hp.status} {hp.similarity}
+                        </p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

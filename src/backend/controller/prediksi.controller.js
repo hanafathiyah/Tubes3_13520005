@@ -126,7 +126,11 @@ const prisma = new PrismaClient();
  * @param {Response} res Express.js Response object
  */
  export async function readPrediksi(req, res) {
-    const data = await prisma.prediksi.findMany()
+    const data = await prisma.prediksi.findMany({
+        include: {
+            penyakit: true
+        }
+    })
     res.json({
         status: "success",
         message: "read data prediksi berhasil",
