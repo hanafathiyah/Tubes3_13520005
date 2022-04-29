@@ -27,7 +27,7 @@ function Tambah() {
         fetchData()
     }, [])
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", paddingTop:"100px" }}>
             <h1>Tambahkan Penyakit</h1>
             <TextField id="outlined-basic" label="Nama Penyakit" variant="outlined" value={namapenyakit} onInput={(e) => setnamapenyakit(e.target.value)} margin="normal" />
             <br></br>
