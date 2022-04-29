@@ -1,7 +1,7 @@
 import { createRequire } from 'module';
 import { boyermooreMatch } from '../lib/boyermoore.js';
 import { kmpMatch } from '../lib/kmp.js';
-import { similarityBmMatch, similarityKmpMatch } from '../lib/similarity.js';
+import { levenshtein, similarityBmMatch, similarityKmpMatch } from '../lib/similarity.js';
 const require = createRequire(import.meta.url);
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
@@ -83,14 +83,14 @@ const prisma = new PrismaClient();
     if(algorithm === "kmp") {
         result = kmpMatch(dnadata, penyakit.rantai);
         if(!result) {
-            similarity = similarityKmpMatch(dnadata, penyakit.rantai);
+            similarity = levenshtein(dnadata, penyakit.rantai) / Math.max(dnadata.length, penyakit.rantai.length);
         } else {
             similarity = 1;
         }
     } else {
         result = boyermooreMatch(dnadata, penyakit.rantai);
         if(!result) {
-            similarity = similarityBmMatch(dnadata, penyakit.rantai);
+            similarity = levenshtein(dnadata, penyakit.rantai) /  Math.max(dnadata.length, penyakit.rantai.length);
         } else {
             similarity = 1;
         }
