@@ -8,7 +8,7 @@ async function submit(namapenyakit, filedna) {
     formdata.append("dnafile",filedna);
     formdata.append("name",namapenyakit);
     try {
-        await axios.post("http://localhost:8080/penyakit", formdata);
+        await axios.post("https://dnachecker.herokuapp.com/penyakit", formdata);
         alert("Penyakit telah ditambahkan!");
     } catch (e) {
         alert("Gagal menambahkan data!");

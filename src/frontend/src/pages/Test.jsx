@@ -10,7 +10,7 @@ async function kmpcheck(namaorang, filedna,idpenyakitchoosen) {
     formdata.append("algorithm","kmp");
     formdata.append("id_penyakit", idpenyakitchoosen);
     try {
-        await axios.post("http://localhost:8080/prediksi", formdata);
+        await axios.post("https://dnachecker.herokuapp.com/prediksi", formdata);
         alert("Prediksi telah ditambahkan!");
     } catch (e) {
         alert("Gagal menambahkan data!");
@@ -24,7 +24,7 @@ async function boyermoorecheck(namaorang, filedna,idpenyakitchoosen) {
     formdata.append("algorithm","boyermoore");
     formdata.append("id_penyakit", idpenyakitchoosen);
     try {
-        await axios.post("http://localhost:8080/prediksi", formdata);
+        await axios.post("https://dnachecker.herokuapp.com/prediksi", formdata);
         alert("Prediksi telah ditambahkan!");
     } catch (e) {
         alert("Gagal menambahkan data!");
@@ -38,7 +38,7 @@ function Test() {
     const [datapenyakit, setdatapenyakit] = useState([])
     const [idpenyakitchoosen, setidpenyakitchoosen] = useState()
     async function fetchData() {
-        const data = await axios.get("http://localhost:8080/penyakit")
+        const data = await axios.get("https://dnachecker.herokuapp.com/penyakit")
         setdatapenyakit(data.data.data)
     }
     useEffect(() => {
