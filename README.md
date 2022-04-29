@@ -8,7 +8,9 @@
 This is a big project created in order to fulfill the requirements of IF2211 Algorithm Strategy course in Institut Teknologi Bandung (ITB) Academic Year of 2021/2022. This project is a web based application created with Node.js on backend and React on frontend. This application also comes with a database which is implemented using PostgreSQL. This application utilizes String Matching Algorithms and Regular Expressions to detect whether a person has a certain genetic disease or not. The prediction results are stored in a database which can be searched using a query.
 
 ## Requirements
+
 - Backend
+
 | Name | Version |
 | :---: | :---: |
 | Node.js | 16.14.2 |
@@ -57,6 +59,9 @@ docker-compose up
   https://dnachecker.netlify.app/
 - backend:
   https://dnachecker.herokuapp.com/
+  
+## Youtube Video
+https://www.youtube.com/watch?v=9ozzSwnEuTI
 
 ## Author
 |   NIM    | Name                |
