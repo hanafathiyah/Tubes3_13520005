@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
 import UploadIcon from '@mui/icons-material/Upload';
 import axios from 'axios'
 
@@ -92,13 +92,38 @@ function Test() {
             </Button>
             <br></br>
             <div>
-                {hasilpemeriksaan.map((hp) => (
                     <div>
-                        <p>
-                            {hp.timestamp} {hp.nama_pasien} {hp.penyakit.nama_penyakit} {hp.status} {hp.similarity}
-                        </p>
+                        <TableContainer component={Paper}>
+                            <Table aria-label="Data Predikzi">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Id</TableCell>
+                                        <TableCell>Timestamp</TableCell>
+                                        <TableCell>Nama Pasien</TableCell>
+                                        <TableCell>Prediksi Penyakit</TableCell>
+                                        <TableCell>Status</TableCell>
+                                        <TableCell>Similarity</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                {hasilpemeriksaan.map((hp) => (
+                                    <TableRow
+                                        key = {hp.id_prediksi}
+                                        sx = {{'&:last-child td, &:last-child th': {border: 0}}}
+                                    >
+                                        <TableCell>{hp.id_prediksi}</TableCell>
+                                        <TableCell>{hp.timestamp}</TableCell>
+                                        <TableCell>{hp.nama_pasien}</TableCell>
+                                        <TableCell>{hp.penyakit.nama_penyakit}</TableCell>
+                                        <TableCell>{hp.status}</TableCell>
+                                        <TableCell>{hp.similarity}</TableCell>
+                                    </TableRow>
+                                ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
-                ))}
+                
             </div>
         </div>
     )
